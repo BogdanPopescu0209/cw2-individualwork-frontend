@@ -26,7 +26,34 @@
             <!--First row-->
             <div class="container-fluid">
 
-                <div class="row"></div>
+                <div class="row">
+
+                    <div class="col-lg"></div>
+                    <div class="col-lg">
+
+                        <header>
+
+                            <h1 v-text="sitename"></h1>
+
+                            <button v-if='cart.length > 0' class="checkout" v-on:click='showCheckout'>
+
+                                {{cartItemCount}}
+                                <span class="fas fa-cart-plus"></span> Checkout
+
+                            </button>
+
+                            <input class="search" type="text" v-model="searchItem" placeholder="Search...">
+
+                            <button class="searchBtn">
+                                <span class="fas fa-search"></span>Search</button>
+
+                        </header>
+
+                    </div>
+
+                    <div class="col-lg"></div>
+
+                </div>
 
             </div>
 
