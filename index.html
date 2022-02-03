@@ -72,31 +72,31 @@
                             <br>
 
                             <div class="container-fluid">
-                
+
                                 <div class="row">
-                
+
                                     <p>Sort by price:</p>
-                
+
                                     <button class="sort" v-on:click="sortLowToHigh()">
                                         <span class="fas fa-sort-up"></span> Low to High
                                     </button>
-                
+
                                     <button class="sort" v-on:click="sortHighToLow()">
                                         <span class="fas fa-sort-down"></span> High to Low
                                     </button>
-                
+
                                     <p>Sort by alphabet:</p>
-                
+
                                     <button class="sort" v-on:click="alphabetUp()">
                                         <span class="fas fa-sort-up"></span> Low to High
                                     </button>
-                
+
                                     <button class="sort" v-on:click="alphabetDown()">
                                         <span class="fas fa-sort-down"></span> High to Low
                                     </button>
-                
+
                                 </div>
-                
+
                             </div>
 
                             <ul v-for="product in products">
@@ -134,9 +134,9 @@
                                 <input type="text" v-model="name" placeholder="Name">
                                 <input type="text" v-model="phoneNumber" placeholder="Phone Number">
 
-                                <button class="postOrder"
-                                    v-if='!onlyLetters.test(name) && onlyNumbers.test(phoneNumber)'
-                                    v-on:click='postOrder'>Post Order</button>
+                                  <button class="postOrder"
+                                v-if='!onlyLetters.test(name) && onlyNumbers.test(phoneNumber)'
+                                v-on:click='postOrder'>Post Order</button>
 
                                 <br>
 
@@ -183,7 +183,7 @@
                 searchItem: '',
                 feedback: '',
                 onlyLetters: /\d/,
-                onlyNumbers: /^[0-9]+$/,
+                onlyNumbers: /^[0-9]+$/
             },
 
             created: function () {
