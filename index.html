@@ -131,7 +131,7 @@
                         lessons: lessonId
                     }
 
-                    fetch('http://localhost:8000/collection/orders', {
+                    fetch('https://lessons-online-store.herokuapp.com/collection/orders', {
 
                         method: 'POST',
                         headers: {
@@ -150,7 +150,7 @@
 
                     for (let i = 0; i < this.cart.length; i++) {
 
-                        fetch('http://localhost:8000/collection/lessons/' + this.cart[i]._id, {
+                        fetch('https://lessons-online-store.herokuapp.com/collection/lessons/' + this.cart[i]._id, {
 
                             method: 'PUT',
                             headers: {
@@ -208,7 +208,7 @@
 
                     if (this.searchItem.length > 0) {
 
-                        await fetch('http://localhost:8000/search/lessons/' + this.searchItem).then(
+                        await fetch('https://lessons-online-store.herokuapp.com/search/lessons/' + this.searchItem).then(
                             function (response) {
                                 response.json().then(
                                     function (json) {
@@ -220,7 +220,7 @@
 
                     } else {
 
-                        fetch('http://localhost:8000/collection/lessons').then(
+                        fetch('https://lessons-online-store.herokuapp.com/collection/lessons').then(
                             function (response) {
                                 response.json().then(
                                     function (json) {
