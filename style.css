@@ -68,3 +68,10 @@ p{
     color: white;
     cursor: pointer;
 }
+
+.sort{
+    background-color: cornflowerblue;
+    color: white;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}

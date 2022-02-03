@@ -29,6 +29,7 @@
                 <div class="row">
 
                     <div class="col-lg"></div>
+
                     <div class="col-lg">
 
                         <header>
@@ -68,6 +69,36 @@
 
                         <div v-if='showProduct'>
 
+                            <br>
+
+                            <div class="container-fluid">
+                
+                                <div class="row">
+                
+                                    <p>Sort by price:</p>
+                
+                                    <button class="sort" v-on:click="sortLowToHigh()">
+                                        <span class="fas fa-sort-up"></span> Low to High
+                                    </button>
+                
+                                    <button class="sort" v-on:click="sortHighToLow()">
+                                        <span class="fas fa-sort-down"></span> High to Low
+                                    </button>
+                
+                                    <p>Sort by alphabet:</p>
+                
+                                    <button class="sort" v-on:click="alphabetUp()">
+                                        <span class="fas fa-sort-up"></span> Low to High
+                                    </button>
+                
+                                    <button class="sort" v-on:click="alphabetDown()">
+                                        <span class="fas fa-sort-down"></span> High to Low
+                                    </button>
+                
+                                </div>
+                
+                            </div>
+
                             <ul v-for="product in products">
                                 <div class="output">
                                     <img v-bind:src="product.image" alt="logo.png">
@@ -90,6 +121,9 @@
                                     <p>Location: {{product.location}}</p>
                                     <p>Price: {{product.price}}</p>
                                     <p>Number of spaces: 1</p>
+                                    <button class="add" v-on:click='deleteFromCart(product)'>
+                                        <span class="fas fa-trash"></span> Delete
+                                    </button>
                                 </div>
                             </ul>
 
@@ -100,7 +134,9 @@
                                 <input type="text" v-model="name" placeholder="Name">
                                 <input type="text" v-model="phoneNumber" placeholder="Phone Number">
 
-                                <button v-on:click='postOrder' class="postOrder">Post Order</button>
+                                <button class="postOrder"
+                                    v-if='!onlyLetters.test(name) && onlyNumbers.test(phoneNumber)'
+                                    v-on:click='postOrder'>Post Order</button>
 
                                 <br>
 
@@ -145,7 +181,9 @@
                 phoneNumber: '',
                 space: '',
                 searchItem: '',
-                feedback: ''
+                feedback: '',
+                onlyLetters: /\d/,
+                onlyNumbers: /^[0-9]+$/,
             },
 
             created: function () {
@@ -175,6 +213,25 @@
                         image: product.image
 
                     })
+                },
+
+                deleteFromCart: function (product) {
+
+                    for (let i = 0; i < this.cart.length; i++) {
+
+                        if (this.cart[i].title === product.title) {
+
+                            this.cart.splice(i, 1);
+
+                            product.quantity++;
+
+                            if (this.cart.length === 0) {
+
+                                this.showProduct = true;
+                            }
+                            break;
+                        }
+                    }
                 },
 
                 postOrder: function () {
@@ -252,6 +309,66 @@
                 canAddToCart: function (product) {
 
                     return product.space > this.cartCount(product.title);
+
+                },
+
+                sortLowToHigh: function () {
+
+                    function compare(x, y) {
+
+                        if (x.price > y.price) return 1;
+
+                        if (x.price < y.price) return -1;
+
+                        return 0;
+                    }
+
+                    return this.products.sort(compare);
+
+                },
+
+                sortHighToLow: function () {
+
+                    function compare(x, y) {
+
+                        if (x.price < y.price) return 1;
+
+                        if (x.price > y.price) return -1;
+
+                        return 0;
+                    }
+
+                    return this.products.sort(compare);
+
+                },
+
+                alphabetUp : function () {
+
+                    function compare(x, y) {
+
+                        if (x.topic > y.topic) return 1;
+
+                        if (x.topic < y.topic) return -1;
+
+                        return 0;
+                    }
+
+                    return this.products.sort(compare);
+
+                },
+
+                alphabetDown : function () {
+
+                    function compare(x, y) {
+
+                        if (x.topic < y.topic) return 1;
+
+                        if (x.topic > y.topic) return -1;
+
+                        return 0;
+                    }
+
+                    return this.products.sort(compare);
 
                 }
             },
