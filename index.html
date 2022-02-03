@@ -37,22 +37,53 @@
 
                 <div class="row">
 
-                    <div v-if='showProduct'>
+                    <main>
 
-                        <ul v-for="product in products">
-                            <div class="output">
-                                <img v-bind:src="product.image" alt="logo.png">
-                                <p>Subject: {{product.topic}}</p>
-                                <p>Location: {{product.location}}</p>
-                                <p>Price: {{product.price}}</p>
-                                <p>Number of spaces: {{product.space}}</p>
-                                <button class="add" v-on:click='addToCart(product)' v-if='canAddToCart(product)'>Add
-                                    to cart</button>
-                                <button class="add" disabled='disabled' v-else>Add to cart</button>
+                        <div v-if='showProduct'>
+
+                            <ul v-for="product in products">
+                                <div class="output">
+                                    <img v-bind:src="product.image" alt="logo.png">
+                                    <p>Subject: {{product.topic}}</p>
+                                    <p>Location: {{product.location}}</p>
+                                    <p>Price: {{product.price}}</p>
+                                    <p>Number of spaces: {{product.space}}</p>
+                                    <button class="add" v-on:click='addToCart(product)' v-if='canAddToCart(product)'>Add
+                                        to cart</button>
+                                    <button class="add" disabled='disabled' v-else>Add to cart</button>
+                                </div>
+                            </ul>
+                        </div>
+
+                        <div v-else>
+                            <ul v-for="product in cart">
+                                <div class="output">
+                                    <img v-bind:src="product.image" alt="logo.png">
+                                    <p>Subject: {{product.title}}</p>
+                                    <p>Location: {{product.location}}</p>
+                                    <p>Price: {{product.price}}</p>
+                                    <p>Number of spaces: 1</p>
+                                </div>
+                            </ul>
+
+                            <br>
+
+                            <div class="order">
+
+                                <input type="text" v-model="name" placeholder="Name">
+                                <input type="text" v-model="phoneNumber" placeholder="Phone Number">
+
+                                <button v-on:click='postOrder' class="postOrder">Post Order</button>
+
+                                <br>
+
+                                <p>{{feedback}}</p>
 
                             </div>
-                        </ul>
-                    </div>
+
+                        </div>
+
+                    </main>
 
                 </div>
 
