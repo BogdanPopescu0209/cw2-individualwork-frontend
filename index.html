@@ -144,6 +144,24 @@
                     this.feedback = 'Order posted successfully!'
 
                     this.putLesson()
+                },
+
+                putLesson: function () {
+
+                    for (let i = 0; i < this.cart.length; i++) {
+
+                        fetch('http://localhost:8000/collection/lessons/' + this.cart[i]._id, {
+
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                "space": this.cart[i].quantity - 1
+                            }),
+                        })
+                            .then(response => response.json())
+                    }
                 }
             }
         })
