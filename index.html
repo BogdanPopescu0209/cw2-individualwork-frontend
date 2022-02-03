@@ -35,7 +35,25 @@
             <!--Second row-->
             <div class="container-fluid">
 
-                <div class="row"></div>
+                <div class="row">
+
+                    <div v-if='showProduct'>
+
+                        <ul v-for="product in products">
+                            <div class="output">
+                                <img v-bind:src="product.image" alt="logo.png">
+                                <p>Subject: {{product.topic}}</p>
+                                <p>Location: {{product.location}}</p>
+                                <p>Price: {{product.price}}</p>
+                                <p>Number of spaces: {{product.space}}</p>
+                                <button class="add">Add
+                                    to cart</button>
+                       
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
 
             </div>
 
@@ -59,8 +77,24 @@
         var vueapp = new Vue({
             el: '#app',
             data: {
-                sitename: 'After School Club'
-            }
+                sitename: 'After School Club',
+                products: {},
+                cart: [],
+                showProduct: true
+            },
+
+            created: function () {
+
+                fetch('https://lessons-online-store.herokuapp.com/collection/lessons').then(
+                    function (response) {
+                        response.json().then(
+                            function (json) {
+                                vueapp.products = json
+                            }
+                        )
+                    }
+                )
+            },
         })
 
     </script>
