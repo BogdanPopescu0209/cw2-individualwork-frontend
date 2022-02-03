@@ -46,8 +46,9 @@
                                 <p>Location: {{product.location}}</p>
                                 <p>Price: {{product.price}}</p>
                                 <p>Number of spaces: {{product.space}}</p>
-                                <button class="add">Add
+                                <button class="add" v-on:click='addToCart(product)' v-if='canAddToCart(product)'>Add
                                     to cart</button>
+                                <button class="add" disabled='disabled' v-else>Add to cart</button>
 
                             </div>
                         </ul>
