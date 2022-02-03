@@ -75,24 +75,34 @@
 
                                 <div class="row">
 
-                                    <p>Sort by price:</p>
+                                    <p>Sort by:</p>
+
+                                    <div class="form-check" style="margin-right: 5px;">
+                                        <input v-model="topic" class="form-check-input" type="checkbox">
+                                        <label class="form-check-label" for="flexCheckDefault"> Subject </label>
+                                    </div>
+
+                                    <div class="form-check" style="margin-right: 5px;">
+                                        <input v-model="location" class="form-check-input" type="checkbox">
+                                        <label class="form-check-label" for="flexCheckDefault"> Location </label>
+                                    </div>
+
+                                    <div class="form-check" style="margin-right: 5px;">
+                                        <input v-model="price" class="form-check-input" type="checkbox">
+                                        <label class="form-check-label" for="flexCheckDefault"> Price </label>
+                                    </div>
+
+                                    <div class="form-check" style="margin-right: 5px;">
+                                        <input v-model="space" class="form-check-input" type="checkbox">
+                                        <label class="form-check-label" for="flexCheckDefault"> Availability </label>
+                                    </div>
 
                                     <button class="sort" v-on:click="sortLowToHigh()">
-                                        <span class="fas fa-sort-up"></span> Low to High
+                                        <span class="fas fa-sort-up"></span> Ascending
                                     </button>
 
                                     <button class="sort" v-on:click="sortHighToLow()">
-                                        <span class="fas fa-sort-down"></span> High to Low
-                                    </button>
-
-                                    <p>Sort by alphabet:</p>
-
-                                    <button class="sort" v-on:click="alphabetUp()">
-                                        <span class="fas fa-sort-up"></span> Low to High
-                                    </button>
-
-                                    <button class="sort" v-on:click="alphabetDown()">
-                                        <span class="fas fa-sort-down"></span> High to Low
+                                        <span class="fas fa-sort-down"></span> Descending
                                     </button>
 
                                 </div>
@@ -134,9 +144,9 @@
                                 <input type="text" v-model="name" placeholder="Name">
                                 <input type="text" v-model="phoneNumber" placeholder="Phone Number">
 
-                                  <button class="postOrder"
-                                v-if='!onlyLetters.test(name) && onlyNumbers.test(phoneNumber)'
-                                v-on:click='postOrder'>Post Order</button>
+                                <button class="postOrder"
+                                    v-if='!onlyLetters.test(name) && onlyNumbers.test(phoneNumber)'
+                                    v-on:click='postOrder'>Post Order</button>
 
                                 <br>
 
@@ -183,7 +193,11 @@
                 searchItem: '',
                 feedback: '',
                 onlyLetters: /\d/,
-                onlyNumbers: /^[0-9]+$/
+                onlyNumbers: /^[0-9]+$/,
+                topic: false,
+                location: false,
+                price: false,
+                space: false
             },
 
             created: function () {
@@ -314,61 +328,121 @@
 
                 sortLowToHigh: function () {
 
-                    function compare(x, y) {
+                    if (this.topic === true) {
 
-                        if (x.price > y.price) return 1;
+                        function compare(x, y) {
 
-                        if (x.price < y.price) return -1;
+                            if (x.topic > y.topic) return 1;
 
-                        return 0;
+                            if (x.topic < y.topic) return -1;
+
+                            return 0;
+                        }
+                        return this.products.sort(compare);
                     }
 
-                    return this.products.sort(compare);
+
+                    if (this.location === true) {
+
+                        function compare(x, y) {
+
+                            if (x.location > y.location) return 1;
+
+                            if (x.location < y.location) return -1;
+
+                            return 0;
+                        }
+                        return this.products.sort(compare);
+
+                    }
+
+                    if (this.price === true) {
+
+                        function compare(x, y) {
+
+                            if (x.price > y.price) return 1;
+
+                            if (x.price < y.price) return -1;
+
+                            return 0;
+                        }
+                        return this.products.sort(compare);
+
+                    }
+
+                    if (this.space === true) {
+
+                        function compare(x, y) {
+
+                            if (x.space > y.space) return 1;
+
+                            if (x.space < y.space) return -1;
+
+                            return 0;
+                        }
+                        return this.products.sort(compare);
+
+                    }
 
                 },
 
                 sortHighToLow: function () {
 
-                    function compare(x, y) {
+                    if (this.topic === true) {
 
-                        if (x.price < y.price) return 1;
+                        function compare(x, y) {
 
-                        if (x.price > y.price) return -1;
+                            if (x.topic < y.topic) return 1;
 
-                        return 0;
+                            if (x.topic > y.topic) return -1;
+
+                            return 0;
+                        }
+                        return this.products.sort(compare);
                     }
 
-                    return this.products.sort(compare);
 
-                },
+                    if (this.location === true) {
 
-                alphabetUp : function () {
+                        function compare(x, y) {
 
-                    function compare(x, y) {
+                            if (x.location < y.location) return 1;
 
-                        if (x.topic > y.topic) return 1;
+                            if (x.location > y.location) return -1;
 
-                        if (x.topic < y.topic) return -1;
+                            return 0;
+                        }
+                        return this.products.sort(compare);
 
-                        return 0;
                     }
 
-                    return this.products.sort(compare);
+                    if (this.price === true) {
 
-                },
+                        function compare(x, y) {
 
-                alphabetDown : function () {
+                            if (x.price < y.price) return 1;
 
-                    function compare(x, y) {
+                            if (x.price > y.price) return -1;
 
-                        if (x.topic < y.topic) return 1;
+                            return 0;
+                        }
+                        return this.products.sort(compare);
 
-                        if (x.topic > y.topic) return -1;
-
-                        return 0;
                     }
 
-                    return this.products.sort(compare);
+                    if (this.space === true) {
+
+                        function compare(x, y) {
+
+                            if (x.space < y.space) return 1;
+
+                            if (x.space > y.space) return -1;
+
+                            return 0;
+                        }
+                        return this.products.sort(compare);
+
+                    }
 
                 }
             },
