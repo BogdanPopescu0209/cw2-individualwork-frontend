@@ -48,7 +48,7 @@
                                 <p>Number of spaces: {{product.space}}</p>
                                 <button class="add">Add
                                     to cart</button>
-                       
+
                             </div>
                         </ul>
                     </div>
@@ -95,6 +95,23 @@
                     }
                 )
             },
+
+            methods: {
+
+                addToCart: function (product) {
+
+                    this.cart.push({
+
+                        _id: product._id,
+                        topic: product.topic,
+                        location: product.location,
+                        price: product.price,
+                        quantity: product.space,
+                        image: product.image
+
+                    })
+                }
+            }
         })
 
     </script>
