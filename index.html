@@ -162,33 +162,44 @@
                         })
                             .then(response => response.json())
                     }
-                }
-            },
+                },
 
-            showCheckout() {
+                showCheckout() {
 
-                this.showProduct = this.showProduct ? false : true;
+                    this.showProduct = this.showProduct ? false : true;
 
-            },
+                },
 
-            cartCount(title) {
+                cartCount(title) {
 
-                let count = 0;
+                    let count = 0;
 
-                for (let i = 0; i < this.cart.length; i++) {
+                    for (let i = 0; i < this.cart.length; i++) {
 
-                    if (this.cart[i] === title) {
+                        if (this.cart[i] === title) {
 
-                        count++
+                            count++
+                        }
                     }
+                    return count;
+                },
+
+                canAddToCart: function (product) {
+
+                    return product.space > this.cartCount(product.title);
+
                 }
-                return count;
             },
 
-            canAddToCart: function (product) {
+            computed: {
 
-                return product.space > this.cartCount(product.title);
+                cartItemCount: function () {
 
+                    this.cartTotalProducts = this.cart.map(item => 1).reduce((prev, curr) => prev + curr, 0);
+
+                    return this.cartTotalProducts || '0';
+
+                }
             },
         })
 
