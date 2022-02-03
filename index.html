@@ -110,6 +110,40 @@
                         image: product.image
 
                     })
+                },
+
+                postOrder: function () {
+
+                    lessonId = [];
+
+                    for (let i = 0; i < this.cart.length; i++) {
+
+                        lessonId.push({
+                            id: this.cart[i]._id,
+                            space: 1
+                        }
+                        )
+                    }
+
+                    let newOrder = {
+                        name: this.name,
+                        phone_number: this.phoneNumber,
+                        lessons: lessonId
+                    }
+
+                    fetch('http://localhost:8000/collection/orders', {
+
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(newOrder),
+                    })
+                        .then(response => response.json())
+
+                    this.feedback = 'Order posted successfully!'
+
+                    this.putLesson()
                 }
             }
         })
