@@ -100,7 +100,9 @@
                                 <input type="text" v-model="name" placeholder="Name">
                                 <input type="text" v-model="phoneNumber" placeholder="Phone Number">
 
-                                <button v-on:click='postOrder' class="postOrder">Post Order</button>
+                                  <button class="postOrder"
+                                v-if='!onlyLetters.test(name) && onlyNumbers.test(phoneNumber)'
+                                v-on:click='postOrder'>Post Order</button>
 
                                 <br>
 
@@ -145,7 +147,9 @@
                 phoneNumber: '',
                 space: '',
                 searchItem: '',
-                feedback: ''
+                feedback: '',
+                onlyLetters: /\d/,
+                onlyNumbers: /^[0-9]+$/,
             },
 
             created: function () {
