@@ -201,6 +201,37 @@
 
                 }
             },
+
+            watch: {
+
+                searchItem: async function () {
+
+                    if (this.searchItem.length > 0) {
+
+                        await fetch('http://localhost:8000/search/lessons/' + this.searchItem).then(
+                            function (response) {
+                                response.json().then(
+                                    function (json) {
+                                        vueapp.products = json
+                                    }
+                                )
+                            }
+                        )
+
+                    } else {
+
+                        fetch('http://localhost:8000/collection/lessons').then(
+                            function (response) {
+                                response.json().then(
+                                    function (json) {
+                                        vueapp.products = json
+                                    }
+                                )
+                            }
+                        )
+                    }
+                }
+            }
         })
 
     </script>
