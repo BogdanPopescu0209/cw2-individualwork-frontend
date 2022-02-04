@@ -55,8 +55,10 @@ p{
     cursor: pointer;
 }
 .order{
-    margin-left: 700px;
-    margin-top: 650px;
+    margin-left: 620px;
+    margin-top: 500px;
+    border: 15px solid cornflowerblue;
+    padding: 50px;
 }
 .postOrder{
     background-color: cornflowerblue;
@@ -72,6 +74,4 @@ p{
 .sort{
     background-color: cornflowerblue;
     color: white;
-    margin-left: 50px;
-    margin-bottom: 20px;
 }
